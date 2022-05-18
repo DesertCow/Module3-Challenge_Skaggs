@@ -1,13 +1,13 @@
 // Varriable Decleration
 
-var Debug = false;
+var Debug = true;
 
 var password = {
   newLength: 12,
-  lowercase: true,
+  lowercase: false,
   uppercase: false,
-  numeric: true,
-  specialChar: true
+  numeric: false,
+  specialChar: false
 }
 
 // Get references to the #generate element
@@ -18,10 +18,17 @@ generateBtn.addEventListener("click", PassGen);
 
 // Method to Pickup user defined password length
 function PassGen() {
+
+  // Grab User Input  
   var tempLength = window.prompt("Please Specify a Password Length");
+  password.lowercase = window.prompt("Do you want to use lower case characters? (True/False)");
+  password.uppercase = window.prompt("Do you want to use uppper case characters? (True/False)");
+  password.numeric = window.prompt("Do you want to use numeric characters? (True/False)");
+  password.specialChar = window.prompt("Do you want to use special characters? (True/False)");
 
   if (Debug) {
-    console.log("User Input = " + tempLength);
+    console.log("Password Length = " + tempLength);
+    console.log("password config Dump = " + tempLength + " || " + password.lowercase + " || " + password.uppercase + " || " + password.numeric + " || " + password.specialChar);
   }
 
   if (tempLength > 8) {
@@ -62,12 +69,38 @@ function writePassword(newLength) {
 
 function generatePassword(passLength) {
   var finalPassword = '';
-  var valid_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()"
+  var lowerCase_chars = "abcdefghijklmnopqrstuvwxyz";
+  var upperCase_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  var numbers_chars = "1234567890";
+  var special_chars = "!@#$%^&*()";
+
+  // Build array of valid chars
+  var valid_chars = "";
+
+  if (password.lowercase) {
+    valid_chars = valid_chars + lowerCase_chars;
+  }
+
+  if (password.uppercase) {
+    valid_chars = valid_chars + upperCase_chars;
+  }
+
+  if (password.numeric) {
+    valid_chars = valid_chars + numbers_chars;
+  }
+
+  if (password.specialChar) {
+    valid_chars = valid_chars + special_chars;
+  }
+
+  if (Debug) {
+    console.log("Final Char List = " + valid_chars);
+  }
 
   for (let i = 0; i < passLength; i++) {
     finalPassword = finalPassword + valid_chars.charAt(Math.floor(Math.random() * valid_chars.length));
     if (Debug) {
-      console.log("i = " + i + "|| passwordLength =" + passLength)
+      // console.log("i = " + i + "|| passwordLength =" + passLength)
     }
 
   }
