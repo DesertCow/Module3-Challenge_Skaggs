@@ -18,7 +18,28 @@ generateBtn.addEventListener("click", PassGen);
 
 // Method to Pickup user defined password length
 function PassGen() {
-  writePassword(password.newLength);
+  var tempLength = window.prompt("Please Specify a Password Length");
+
+  if (Debug) {
+    console.log("User Input = " + tempLength);
+  }
+
+  if (tempLength > 8) {
+
+    if (tempLength < 128) {
+
+      password.newLength = tempLength;
+      console.log("Password Length Set From User Input = " + password.newLength);
+      writePassword(password.newLength);
+
+    } else {
+      console.log("ERROR INVALID INPUT TRY AGAIN!");
+      window.alert("ERROR INVALID INPUT TRY AGAIN!");
+    }
+  } else {
+    console.log("ERROR INVALID INPUT TRY AGAIN!");
+    window.alert("ERROR INVALID INPUT TRY AGAIN!");
+  }
 }
 
 // Write password to the #password input
