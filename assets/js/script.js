@@ -53,6 +53,108 @@ function generatePassword(passLength) {
     finalPassword = finalPassword + valid_chars.charAt(Math.floor(Math.random() * valid_chars.length));
 
   }
+
+  var finalPassArray = finalPassword.split("");
+  var finalCharList = valid_chars.split("");
+  var validFlag = false;
+
+  console.log("Pass Length = " + finalPassArray.length)
+  console.log("Char List Length = " + finalCharList.length)
+
+  if (password.lowercase === 'true') {
+    for (let i = 0; i < charList.lowerCase_chars.length; i++) {
+
+      if ((finalPassArray.indexOf(charList.lowerCase_chars[i]) === -1) && !(validFlag)) {
+        console.log("WARNING: PASSWORD MISSING LowerCase Char! || " + charList.lowerCase_chars[i])
+        validFlag = false;
+      }
+      else {
+        if (!(validFlag)) {
+          validFlag = true;
+          console.log(charList.lowerCase_chars[i] + " lower case Char found in password!");
+        }
+
+      }
+
+    }
+    //    finalPassword must contain char from charList.lowerCase_chars
+  }
+
+  // Flag Reset
+  validFlag = false;
+
+  if (password.uppercase === 'true') {
+    for (let i = 0; i < charList.upperCase_chars.length; i++) {
+
+      if ((finalPassArray.indexOf(charList.upperCase_chars[i]) === -1) && !(validFlag)) {
+        console.log("WARNING: PASSWORD MISSING Upper Case Char! || " + charList.upperCase_chars[i])
+        validFlag = false;
+      }
+      else {
+        if (!(validFlag)) {
+          validFlag = true;
+          console.log(charList.upperCase_chars[i] + " Upper case Char found in password!");
+        }
+
+      }
+
+    }
+  }
+
+  // Flag Reset
+  validFlag = false;
+
+  if (password.numeric === 'true') {
+    for (let i = 0; i < charList.numbers_chars.length; i++) {
+
+      if ((finalPassArray.indexOf(charList.numbers_chars[i]) === -1) && !(validFlag)) {
+        console.log("WARNING: PASSWORD MISSING Numbers! || " + charList.numbers_chars[i])
+        validFlag = false;
+      }
+      else {
+        if (!(validFlag)) {
+          validFlag = true;
+          console.log(charList.numbers_chars[i] + " Numbers found in password!");
+        }
+
+      }
+
+    }
+  }
+
+  // Flag Reset
+  validFlag = false;
+
+  if (password.specialChar === 'true') {
+    for (let i = 0; i < charList.special_chars.length; i++) {
+
+      if ((finalPassArray.indexOf(charList.special_chars[i]) === -1) && !(validFlag)) {
+        console.log("WARNING: PASSWORD MISSING Special Char! || " + charList.special_chars[i])
+        validFlag = false;
+      }
+      else {
+        if (!(validFlag)) {
+          validFlag = true;
+          console.log(charList.special_chars[i] + " Special Char found in password!");
+        }
+
+      }
+
+    }
+  }
+
+  // if (password.lowercase === 'true') {
+
+  //   for (var i = 0; i < ; i++) {
+  //     lowercase
+  //     password.newPassword.includes("")
+  //   }
+  //   password.newPassword.includes("")
+  //   //  PassUserInput();
+  // }
+
+  // indexOf()
+
   return finalPassword;
 
   if (Debug) { console.log("New Password: " + finalPassword); }
@@ -109,10 +211,10 @@ function PassUserInput() {
       var specialCharTemp = window.prompt("Do you want to use special characters? (True/False)");
       password.specialChar = specialCharTemp.toLowerCase();
 
-      // Logic to confirm user selected atleast family of chars
+      // Logic to confirm user selected atleast a family of chars
       if ((password.lowercase === 'true') || (password.uppercase === 'true') || (password.numeric === 'true') || (password.specialChar === 'true')) {
 
-        // Call wirePassword Method to generate new password of length "newLength" and update webpage HTML
+        // Call writePassword Method to generate new password of length "newLength" and update webpage HTML
         writePassword(password.newLength);
 
       } else {
@@ -131,13 +233,13 @@ function PassUserInput() {
   }
 
   // Logic to confirm atleast one of each type of char in password
-  // if () {
-  //   PassUserInput();
-  // }
-
+  //if(password.newPassword)
 
   if (Debug) {
-    console.log("password config Dump = " + tempLength + " || " + password.lowercase + " || " + password.uppercase + " || " + password.numeric + " || " + password.specialChar + " || " + password.minLength + " || " + password.maxLength);
+    console.log("Var |password| State = " + tempLength + " || "
+      + password.lowercase + " || " + password.uppercase + " || "
+      + password.numeric + " || " + password.specialChar + " || "
+      + password.minLength + " || " + password.maxLength);
   }
 }
 
