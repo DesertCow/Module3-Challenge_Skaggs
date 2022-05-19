@@ -12,61 +12,54 @@ var password = {
   newPassword: "VOID"
 }
 
-// ================ Functions ================
+var charList = {
+  lowerCase_chars: "abcdefghijklmnopqrstuvwxyz",
+  upperCase_chars: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+  numbers_chars: "1234567890",
+  special_chars: "!@#$%^&*()"
+}
 
+// ================ Functions ================
+// Function generates a user password of length "passLength"
 function generatePassword(passLength) {
   var finalPassword = '';
-  var lowerCase_chars = "abcdefghijklmnopqrstuvwxyz";
-  var upperCase_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  var numbers_chars = "1234567890";
-  var special_chars = "!@#$%^&*()";
 
   // Build array of valid chars
   var valid_chars = "";
 
-  console.log("Uppercase Check: " + password.uppercase)
+  if (Debug) { console.log("Uppercase Check: " + password.uppercase); }
 
   if (password.lowercase === 'true') {
-    valid_chars = valid_chars + lowerCase_chars;
+    valid_chars = valid_chars + charList.lowerCase_chars;
   }
-
-  console.log("Lowercase Check: " + valid_chars + " || " + password.lowercase);
+  if (Debug) { console.log("Lowercase Check: " + valid_chars + " || " + password.lowercase); }
 
   if (password.uppercase === 'true') {
-    valid_chars = valid_chars + upperCase_chars;
+    valid_chars = valid_chars + charList.upperCase_chars;
   }
-
-  console.log("Number Check: " + valid_chars + " || " + password.numeric);
+  if (Debug) { console.log("Number Check: " + valid_chars + " || " + password.numeric); }
 
   if (password.numeric === 'true') {
-    valid_chars = valid_chars + numbers_chars;
+    valid_chars = valid_chars + charList.numbers_chars;
   }
-
-  console.log("Special Check: " + valid_chars + " || " + password.specialChar);
+  if (Debug) { console.log("Special Check: " + valid_chars + " || " + password.specialChar); }
 
   if (password.specialChar === 'true') {
-    valid_chars = valid_chars + special_chars;
+    valid_chars = valid_chars + charList.special_chars;
   }
-
-  if (Debug) {
-    console.log("Final Char List = " + valid_chars);
-  }
+  if (Debug) { console.log("Final Char List = " + valid_chars); }
 
   for (let i = 0; i < passLength; i++) {
     finalPassword = finalPassword + valid_chars.charAt(Math.floor(Math.random() * valid_chars.length));
-    if (Debug) {
-      // console.log("i = " + i + "|| passwordLength =" + passLength)
-    }
 
   }
   return finalPassword;
 
-  if (Debug) {
-    console.log("New Password: " + finalPassword);
-  }
+  if (Debug) { console.log("New Password: " + finalPassword); }
 }
 
-// Write Generated Password to console and HTML
+// ================ Function ===============
+// Request a password of "newLength" to be generated and printed to page
 function writePassword(newLength) {
   var passwordFinal = "TEMP";
 
@@ -87,15 +80,9 @@ function writePassword(newLength) {
   }
 }
 
-
-// Get references to the #generate element
-var generateBtn = document.querySelector("#generate");
-
-// Add event listener to generate button
-generateBtn.addEventListener("click", PassGen);
-
-// Method to Pickup user defined password length
-function PassGen() {
+// ================ Function ===============
+// Master Function to get user input and kick off generation process
+function PassUserInput() {
 
   // Grab User Input  
   var tempLength = window.prompt("Please Specify a Password Length");
@@ -124,8 +111,10 @@ function PassGen() {
 
       // Logic to confirm user selected atleast family of chars
       if ((password.lowercase === 'true') || (password.uppercase === 'true') || (password.numeric === 'true') || (password.specialChar === 'true')) {
-        // Call wirePassword Method to generate new password of length "newLength"
+
+        // Call wirePassword Method to generate new password of length "newLength" and update webpage HTML
         writePassword(password.newLength);
+
       } else {
         console.log("ERROR: NO CHARS SELECTED, PLEASE ENABLE ATLEAST ONE CHAR SET");
         window.alert("ERROR: NO CHARS SELECTED, PLEASE ENABLE ATLEAST ONE CHAR SET");
@@ -143,7 +132,7 @@ function PassGen() {
 
   // Logic to confirm atleast one of each type of char in password
   // if () {
-  //   PassGen();
+  //   PassUserInput();
   // }
 
 
@@ -152,8 +141,13 @@ function PassGen() {
   }
 }
 
+// ================ MAIN ===============
 
+// Get references to the #generate element
+var generateBtn = document.querySelector("#generate");
 
+// Add event listener to generate button
+generateBtn.addEventListener("click", PassUserInput);
 
-// console.log("New Password = " + generatePassword(password.newLength));
+// ================ END MAIN ===============
 
