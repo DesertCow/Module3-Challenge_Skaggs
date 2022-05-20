@@ -84,7 +84,7 @@ Version 0.2</h5>
 <br>
 <br>
 
-<h3 align="center">📡  📡 Deployment Information 📡 📡</h3>
+<h3 align="center">📡 📡 Deployment Information 📡 📡</h3>
 
 ---
 
