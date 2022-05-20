@@ -29,9 +29,15 @@ function generatePassword(passLength) {
 
   if (Debug) { console.log("Uppercase Check: " + password.uppercase); }
 
+
+
   if (password.lowercase === 'true') {
     valid_chars = valid_chars + charList.lowerCase_chars;
   }
+
+
+
+
   if (Debug) { console.log("Lowercase Check: " + valid_chars + " || " + password.lowercase); }
 
   if (password.uppercase === 'true') {
@@ -50,6 +56,7 @@ function generatePassword(passLength) {
   if (Debug) { console.log("Final Char List = " + valid_chars); }
 
   for (let i = 0; i < passLength; i++) {
+    
     finalPassword = finalPassword + valid_chars.charAt(Math.floor(Math.random() * valid_chars.length));
 
   }
