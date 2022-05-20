@@ -167,10 +167,7 @@ function generatePassword(passLength) {
     }
   }
 
-  // Password has been validated and returned from function as 'passwordFinal' @ #171
-  if (validFlag) {
-    return finalPassword;
-  }
+
 
   // Could not find a way to compare two boolean values to determind if they are equal, everything i tried returns false boolean statements like true = false and returing true...
   // Something todo with types... need to convert string to boolean??
@@ -194,6 +191,12 @@ function generatePassword(passLength) {
 
 
   if (Debug) { console.log("New Password: " + finalPassword); }
+
+  // Password has been validated and returned from function as 'passwordFinal' @ #171
+  if (specialCharValid || numericCharValid || upperCharValid || lowerCharValid) {
+    return finalPassword;
+  }
+
 }
 
 // =============================== Function ==============================
